@@ -28,7 +28,7 @@ struct BatteryMenuBlockView: View {
                         .miniSection()
                         .padding(.trailing, 4)
                 }
-                if !io.isCharging && !io.isCharged && io.timeToEmpty >= 0 {
+                if io.powerSource == .battery && io.timeToEmpty > 0 {
                     Text(io.timeToEmpty.readableTimeInMin)
                         .displayText()
                     Text("battery.to_empty".localized())
