@@ -1,0 +1,80 @@
+name: Release
+
+# Push a tag like v1.7.0 to build eul.app and publish it as a GitHub release.
+# The app's update check downloads eul.app.zip from the latest release.
+#
+# With these repository secrets set, the app is signed with your Developer ID
+# and notarized by Apple, so it opens without a warning:
+#   MACOS_CERTIFICATE           base64 of the "Developer ID Application" .p12
+#   MACOS_CERTIFICATE_PASSWORD  password of that .p12
+#   APPLE_TEAM_ID               10-character team ID
+#   APPLE_ID                    Apple ID email of the developer account
+#   APPLE_APP_PASSWORD          app-specific password for that Apple ID
+# Without them the app is ad-hoc signed and macOS asks once before opening it.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  Release:
+    runs-on: macos-latest
+    env:
+      HAS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import Developer ID certificate
+        if: env.HAS_CERTIFICATE == 'true'
+        env:
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+        run: |
+          keychain="$RUNNER_TEMP/build.keychain"
+          keychain_password=$(uuidgen)
+          echo "$MACOS_CERTIFICATE" | base64 --decode > "$RUNNER_TEMP/certificate.p12"
+          security create-keychain -p "$keychain_password" "$keychain"
+          security set-keychain-settings -lut 3600 "$keychain"
+          security unlock-keychain -p "$keychain_password" "$keychain"
+          security import "$RUNNER_TEMP/certificate.p12" -k "$keychain" -P "$MACOS_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$keychain_password" "$keychain"
+          security list-keychains -d user -s "$keychain" $(security list-keychains -d user | tr -d '"')
+          rm "$RUNNER_TEMP/certificate.p12"
+      - name: Build
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          if [ "$HAS_CERTIFICATE" = "true" ]; then
+            signing=(CODE_SIGN_IDENTITY="Developer ID Application" CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="$APPLE_TEAM_ID" ENABLE_HARDENED_RUNTIME=YES OTHER_CODE_SIGN_FLAGS=--timestamp)
+          else
+            signing=(CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= CODE_SIGN_ENTITLEMENTS=)
+          fi
+          # Universal: Apple silicon and Intel
+          xcodebuild -scheme eul -project ./eul.xcodeproj -configuration Release -derivedDataPath build \
+            ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO "${signing[@]}" build
+      - name: Check the app version matches the tag
+        # Otherwise the update check would offer this same release forever
+        run: |
+          version=$(plutil -extract CFBundleShortVersionString raw build/Build/Products/Release/eul.app/Contents/Info.plist)
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "App version $version does not match tag $GITHUB_REF_NAME. Update MARKETING_VERSION first."
+            exit 1
+          fi
+      - name: Notarize
+        if: env.HAS_CERTIFICATE == 'true'
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+        run: |
+          ditto -c -k --keepParent build/Build/Products/Release/eul.app notarize.zip
+          xcrun notarytool submit notarize.zip --apple-id "$APPLE_ID" --team-id "$APPLE_TEAM_ID" --password "$APPLE_APP_PASSWORD" --wait
+          xcrun stapler staple build/Build/Products/Release/eul.app
+      - name: Zip
+        run: ditto -c -k --keepParent build/Build/Products/Release/eul.app eul.app.zip
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" eul.app.zip --title "$GITHUB_REF_NAME" --generate-notes
