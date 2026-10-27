@@ -15,6 +15,12 @@ name: Release
 on:
   push:
     tags: ['v*']
+  # Rebuild an existing tag, for example when a run failed or never got a runner
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to build, like v1.7.0
+        required: true
 
 permissions:
   contents: write
@@ -23,10 +29,13 @@ jobs:
   Release:
     runs-on: macos-latest
     env:
+      TAG: ${{ inputs.tag || github.ref_name }}
       HAS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE != '' }}
       APPLE_TEAM_ID: 5K924E4K29
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - name: Import Developer ID certificate
         if: env.HAS_CERTIFICATE == 'true'
         env:
@@ -57,8 +66,8 @@ jobs:
         # Otherwise the update check would offer this same release forever
         run: |
           version=$(plutil -extract CFBundleShortVersionString raw build/Build/Products/Release/eul.app/Contents/Info.plist)
-          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
-            echo "App version $version does not match tag $GITHUB_REF_NAME. Update MARKETING_VERSION first."
+          if [ "v$version" != "$TAG" ]; then
+            echo "App version $version does not match tag $TAG. Update MARKETING_VERSION first."
             exit 1
           fi
       - name: Notarize
@@ -81,8 +90,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         # A release made on the GitHub website creates the tag first, so add the zip to it
         run: |
-          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" eul.app.zip --clobber
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" eul.app.zip --clobber
           else
-            gh release create "$GITHUB_REF_NAME" eul.app.zip --title "$GITHUB_REF_NAME" --generate-notes
+            gh release create "$TAG" eul.app.zip --title "$TAG" --generate-notes
           fi
