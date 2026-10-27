@@ -41,6 +41,8 @@
 "cpu.system" = "ระบบ";
 "cpu.user" = "ผู้ใช้";
 "cpu.nice" = "Nice";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "กำลังรอที่จะรายงานครั้งแรก";
 
 // MARK: Fan

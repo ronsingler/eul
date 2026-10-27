@@ -44,6 +44,8 @@ battery.timeRemaining = "Time Rem.";
 "cpu.system" = "시스템";
 "cpu.user" = "사용자";
 "cpu.nice" = "낮은 우선순위 사용자";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "첫 보고 대기중";
 
 // MARK: Fan

@@ -41,6 +41,8 @@
 "cpu.system" = "Systém";
 "cpu.user" = "Uživatel";
 "cpu.nice" = "Prioritní";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "Čekání na první hlášení o stavu";
 
 // MARK: Fan

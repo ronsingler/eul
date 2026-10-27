@@ -42,6 +42,8 @@ Copyright © 2020 Gao Sun. All rights reserved.
 "cpu.system" = "System";
 "cpu.user" = "Användare";
 "cpu.nice" = "Nice";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "Väntar på statusrapport";
 
 // MARK: Fan

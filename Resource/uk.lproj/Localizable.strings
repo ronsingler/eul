@@ -41,6 +41,8 @@
 "cpu.system" = "Система";
 "cpu.user" = "Користувач";
 "cpu.nice" = "Пріоритет";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "Очікування статус репорту";
 
 // MARK: Fan
