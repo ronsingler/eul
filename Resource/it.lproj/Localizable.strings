@@ -63,6 +63,10 @@
 "memory.app" = "App";
 "memory.wired" = "Wired";
 "memory.compressed" = "Compressa";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "Rete";

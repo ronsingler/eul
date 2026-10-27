@@ -62,6 +62,10 @@
 "memory.app" = "Aplikace";
 "memory.wired" = "Nepřesunutelná";
 "memory.compressed" = "Komprimovaná";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "Síť";

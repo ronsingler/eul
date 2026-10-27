@@ -63,6 +63,10 @@ Copyright © 2020 Gao Sun. All rights reserved.
 "memory.app" = "App";
 "memory.wired" = "Kärna";
 "memory.compressed" = "Komprimerat";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "Nätverk";

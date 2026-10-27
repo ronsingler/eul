@@ -62,6 +62,10 @@
 "memory.app" = "App";
 "memory.wired" = "Vezetékes";
 "memory.compressed" = "Tömörített";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "Hálózat";

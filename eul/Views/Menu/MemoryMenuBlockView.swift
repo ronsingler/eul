@@ -50,6 +50,15 @@ struct MemoryMenuBlockView: View {
                     }
                 }
             }
+            if let pressure = memoryStore.pressure, let pressureLevel = memoryStore.pressureLevel {
+                HStack {
+                    MiniSectionView(
+                        title: "memory.pressure",
+                        value: "\(String(format: "%.0f%%", pressure)) · \(pressureLevel.description)"
+                    )
+                    Spacer()
+                }
+            }
             if preferenceStore.showRAMTopActivities {
                 SeparatorView()
                 VStack(spacing: 8) {

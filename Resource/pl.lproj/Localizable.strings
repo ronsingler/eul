@@ -62,6 +62,10 @@
 "memory.app" = "Aplikacja";
 "memory.wired" = "Wired";
 "memory.compressed" = "Skompresowana";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "Sieć";
