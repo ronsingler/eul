@@ -17,6 +17,16 @@
 
 macOS 10.15 minimum for SwiftUI support
 
+## Building on Apple silicon
+
+This fork updates eul for M series Macs. To build it yourself:
+
+1. Open `eul.xcodeproj` in Xcode.
+2. For each target (eul, SelfUpdate, SharedLibrary and the four widgets), open **Signing & Capabilities** and pick your own team.
+3. Pick the `eul` scheme and press Run.
+
+Update checks point at this fork (`ronsingler/eul`), so the app won't pull builds from the original project.
+
 ## Installation
 
 ### Download
