@@ -45,7 +45,10 @@ class GpuStore: ObservableObject, Refreshable {
 
     func getStatustic(for gpu: GPU) -> GPU.Statistic? {
         gpuStatistics.first {
-            $0.pciMatch.lowercased().contains(gpu.deviceId.deletingPrefix("0x"))
+            guard let pciMatch = $0.pciMatch else {
+                return gpu.isBuiltIn
+            }
+            return pciMatch.lowercased().contains(gpu.deviceId.deletingPrefix("0x"))
         }
     }
 
