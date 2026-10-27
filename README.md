@@ -31,7 +31,7 @@ Update checks point at this fork (`ronsingler/eul`), so the app won't pull build
 
 ### Download
 
-Download the [latest release](https://github.com/gao-sun/eul/releases/latest/download/eul.app.zip) directly and drag `.app` file into your `Application` folder.
+Download the [latest release](https://github.com/ronsingler/eul/releases/latest/download/eul.app.zip) directly and drag `.app` file into your `Application` folder.
 
 ### Homebrew Cask
 
@@ -50,7 +50,7 @@ Note:
 
 ### Release Notes
 
-[Click here](https://github.com/gao-sun/eul/releases/latest) to browse our latest release notes.
+[Click here](https://github.com/ronsingler/eul/releases/latest) to browse our latest release notes.
 
 ## Contributors
 
