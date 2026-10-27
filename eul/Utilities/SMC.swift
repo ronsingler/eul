@@ -98,6 +98,19 @@ public extension Int {
 }
 
 extension Double {
+    init(fromFLT bytes: FLT) {
+        var value: Float = 0
+        memcpy(&value, [bytes.0, bytes.1, bytes.2, bytes.3], 4)
+        self = Double(value)
+    }
+
+    init(fromIOFT bytes: SMCBytes) {
+        let raw = [bytes.0, bytes.1, bytes.2, bytes.3, bytes.4, bytes.5, bytes.6, bytes.7]
+            .enumerated()
+            .reduce(UInt64(0)) { $0 | UInt64($1.element) << (8 * UInt64($1.offset)) }
+        self = Double(raw) / 65536
+    }
+
     init(fromSP78 bytes: SP78) {
         // FIXME: Handle second byte
         let sign = bytes.0 & 0x80 == 0 ? 1.0 : -1.0
@@ -197,7 +210,10 @@ public struct SMCParamStruct {
 
     public struct SMCKeyInfoData {
         /// How many bytes written to SMCParamStruct.bytes
-        var dataSize: IOByteCount = 0
+        ///
+        /// 32 bits in the driver's struct. Not IOByteCount, which is 64 bits on
+        /// arm64 and makes the struct bigger than 80 bytes there.
+        var dataSize: UInt32 = 0
 
         /// Type of data written to SMCParamStruct.bytes. This lets us know how
         /// to interpret it (translate it to human readable)
@@ -251,6 +267,8 @@ public enum DataTypes {
     /// See type aliases
     public static let FPE2 = DataType(type: FourCharCode(fromStaticString: "fpe2"), size: 2)
     public static let FLT = DataType(type: FourCharCode(fromStaticString: "flt "), size: 4)
+    /// Fixed point, 48 bits integer, 16 bits fraction, little endian
+    public static let IOFT = DataType(type: FourCharCode(fromStaticString: "ioft"), size: 8)
     /// See type aliases
     public static let SP78 = DataType(type: FourCharCode(fromStaticString: "sp78"), size: 2)
     public static let UInt8 = DataType(type: FourCharCode(fromStaticString: "ui8 "), size: 1)
@@ -333,7 +351,7 @@ public enum SMCKit {
         let outputStruct = try callDriver(&inputStruct)
 
         return DataType(type: outputStruct.keyInfo.dataType,
-                        size: UInt32(outputStruct.keyInfo.dataSize))
+                        size: outputStruct.keyInfo.dataSize)
     }
 
     /// Get information about the key at index
@@ -355,7 +373,7 @@ public enum SMCKit {
         var inputStruct = SMCParamStruct()
 
         inputStruct.key = key.code
-        inputStruct.keyInfo.dataSize = IOByteCount(UInt32(key.info.size))
+        inputStruct.keyInfo.dataSize = key.info.size
         inputStruct.data8 = SMCParamStruct.Selector.kSMCReadKey.rawValue
 
         let outputStruct = try callDriver(&inputStruct)
@@ -369,7 +387,7 @@ public enum SMCKit {
 
         inputStruct.key = key.code
         inputStruct.bytes = data
-        inputStruct.keyInfo.dataSize = IOByteCount(UInt32(key.info.size))
+        inputStruct.keyInfo.dataSize = key.info.size
         inputStruct.data8 = SMCParamStruct.Selector.kSMCWriteKey.rawValue
 
         _ = try callDriver(&inputStruct)
@@ -579,6 +597,26 @@ public extension SMCKit {
         return sensors
     }
 
+    /// Temperature sensors on Apple silicon. Their names change from chip to
+    /// chip, so find them by prefix: Tp/Te for CPU cores, Tg for GPU, Tm for
+    /// memory.
+    static func appleSiliconTemperatureSensors() throws -> [TemperatureSensor] {
+        let prefixes = ["Tp", "Te", "Tg", "Tm"]
+
+        return try (0..<keyCount()).compactMap { index in
+            let code = try keyInformationAtIndex(index)
+            let name = code.toString()
+            guard
+                prefixes.contains(where: { name.hasPrefix($0) }),
+                TemperatureSensors.all[code] == nil,
+                (try? keyInformation(code)) == DataTypes.FLT
+            else {
+                return nil
+            }
+            return TemperatureSensor(name: name, code: code)
+        }
+    }
+
     static func allUnknownTemperatureSensors() throws -> [TemperatureSensor] {
         let keys = try allKeys()
 
@@ -591,11 +629,20 @@ public extension SMCKit {
 
     /// Get current temperature of a sensor
     static func temperature(_ sensorCode: FourCharCode,
+                            info: DataType = DataTypes.SP78,
                             unit: TemperatureUnit = .celius) throws -> Double
     {
-        let data = try readData(SMCKey(code: sensorCode, info: DataTypes.SP78))
+        let data = try readData(SMCKey(code: sensorCode, info: info))
 
-        let temperatureInCelius = Double(fromSP78: (data.0, data.1))
+        let temperatureInCelius: Double
+        switch info {
+        case DataTypes.FLT:
+            temperatureInCelius = Double(fromFLT: (data.0, data.1, data.2, data.3))
+        case DataTypes.IOFT:
+            temperatureInCelius = Double(fromIOFT: data)
+        default:
+            temperatureInCelius = Double(fromSP78: (data.0, data.1))
+        }
 
         switch unit {
         case .celius:
@@ -677,24 +724,15 @@ public extension SMCKit {
         return name.trimmingCharacters(in: characterSet)
     }
 
+    /// Fan speeds are fpe2 on most Intel Macs and flt on T2 and Apple silicon
     private static func decodeData(with code: String) throws -> Int {
-        do {
-            let key = SMCKey(
-                code: FourCharCode(fromString: code),
-                info: DataTypes.FPE2
-            )
+        let fourCharCode = FourCharCode(fromString: code)
+        let info = try keyInformation(fourCharCode)
+        let data = try readData(SMCKey(code: fourCharCode, info: info))
 
-            let data = try readData(key)
-            return Int(fromFPE2: (data.0, data.1))
-        } catch SMCError.unknown(kIOReturn: 0, SMCResult: 135) {
-            let key = SMCKey(
-                code: FourCharCode(fromString: code),
-                info: DataTypes.FLT
-            )
-
-            let data = try readData(key)
-            return Int(fromFLT: (data.0, data.1, data.2, data.3))
-        }
+        return info == DataTypes.FLT
+            ? Int(fromFLT: (data.0, data.1, data.2, data.3))
+            : Int(fromFPE2: (data.0, data.1))
     }
 
     static func fanCurrentSpeed(_ id: Int) throws -> Int {

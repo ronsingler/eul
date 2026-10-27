@@ -18,6 +18,7 @@ class SmcControl: Refreshable {
     var tempUnit: TemperatureUnit = .celius
     var cpuDieTemperature: Double? {
         sensors.first(where: { $0.sensor.name == "CPU_0_DIE" })?.temp
+            ?? averageTemperature(prefixes: ["Tp", "Te"])
     }
 
     var cpuProximityTemperature: Double? {
@@ -26,10 +27,23 @@ class SmcControl: Refreshable {
 
     var gpuProximityTemperature: Double? {
         sensors.first(where: { $0.sensor.name == "GPU_0_PROXIMITY" })?.temp
+            ?? averageTemperature(prefixes: ["Tg"])
     }
 
     var memoryProximityTemperature: Double? {
         sensors.first(where: { $0.sensor.name == "MEM_SLOTS_PROXIMITY" })?.temp
+            ?? averageTemperature(prefixes: ["Tm"])
+    }
+
+    /// Average of the Apple silicon sensors whose names start with one of the prefixes
+    private func averageTemperature(prefixes: [String]) -> Double? {
+        let temps = sensors
+            .filter { sensor in prefixes.contains { sensor.sensor.name.hasPrefix($0) } }
+            .compactMap { $0.temp }
+        guard temps.count > 0 else {
+            return nil
+        }
+        return temps.reduce(0, +) / Double(temps.count)
     }
 
     var isFanValid: Bool {
@@ -43,7 +57,16 @@ class SmcControl: Refreshable {
     init() {
         do {
             try SMCKit.open()
-            sensors = try SMCKit.allKnownTemperatureSensors().map { .init(sensor: $0) }
+            let knownSensors = try SMCKit.allKnownTemperatureSensors()
+            let appleSiliconSensors = try SMCKit.appleSiliconTemperatureSensors()
+            // Some Intel key names exist on Apple silicon with another data type,
+            // so read each sensor with the type the SMC reports for it
+            sensors = (knownSensors + appleSiliconSensors).compactMap { sensor in
+                guard let info = try? SMCKit.keyInformation(sensor.code) else {
+                    return nil
+                }
+                return TemperatureData(sensor: sensor, info: info)
+            }
             fans = try (0..<SMCKit.fanCount()).map { FanData(
                 id: $0,
                 minSpeed: try? SMCKit.fanMinSpeed($0),
@@ -69,9 +92,22 @@ class SmcControl: Refreshable {
     @objc func refresh() {
         for sensor in sensors {
             do {
-                sensor.temp = try SMCKit.temperature(sensor.sensor.code, unit: tempUnit)
+                let celsius = try SMCKit.temperature(sensor.sensor.code, info: sensor.info)
+                // Unused sensors read 0, and a few return junk
+                guard celsius > 0, celsius < 150 else {
+                    sensor.temp = nil
+                    continue
+                }
+                switch tempUnit {
+                case .celius:
+                    sensor.temp = celsius
+                case .fahrenheit:
+                    sensor.temp = TemperatureUnit.toFahrenheit(celsius)
+                case .kelvin:
+                    sensor.temp = TemperatureUnit.toKelvin(celsius)
+                }
             } catch {
-                sensor.temp = 0
+                sensor.temp = nil
                 print("error while getting temperature", error)
             }
         }
