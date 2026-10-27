@@ -15,6 +15,10 @@ class SmcControl: Refreshable {
 
     var sensors: [TemperatureData] = []
     var fans: [FanData] = []
+    /// Power used by the whole Mac in watts. Only on Macs whose SMC has PSTR.
+    var systemPower: Double?
+    private let systemPowerCode = FourCharCode(fromStaticString: "PSTR")
+    private var hasSystemPower = false
     var tempUnit: TemperatureUnit = .celius
     var cpuDieTemperature: Double? {
         sensors.first(where: { $0.sensor.name == "CPU_0_DIE" })?.temp
@@ -57,6 +61,7 @@ class SmcControl: Refreshable {
     init() {
         do {
             try SMCKit.open()
+            hasSystemPower = (try? SMCKit.keyInformation(systemPowerCode)) == DataTypes.FLT
             let knownSensors = try SMCKit.allKnownTemperatureSensors()
             let appleSiliconSensors = try SMCKit.appleSiliconTemperatureSensors()
             // Some Intel key names exist on Apple silicon with another data type,
@@ -110,6 +115,11 @@ class SmcControl: Refreshable {
                 sensor.temp = nil
                 print("error while getting temperature", error)
             }
+        }
+        if hasSystemPower, let power = try? SMCKit.power(systemPowerCode), power >= 0, power < 1000 {
+            systemPower = power
+        } else {
+            systemPower = nil
         }
         fans = fans.map {
             FanData(

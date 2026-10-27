@@ -14,6 +14,7 @@ import WidgetKit
 
 class CpuStore: ObservableObject, Refreshable {
     @Published var temp: Double?
+    @Published var systemPower: Double?
     @Published var usageCPU: (system: Double, user: Double, idle: Double, nice: Double)?
     @Published var loadAverage: [Double]?
     @Published var physicalCores = 0
@@ -171,6 +172,7 @@ class CpuStore: ObservableObject, Refreshable {
     }
 
     private func getTemp() {
+        systemPower = SmcControl.shared.systemPower
         temp = (SmcControl.shared.cpuDieTemperature ?? 0) > 0
             ? SmcControl.shared.cpuDieTemperature
             : SmcControl.shared.cpuProximityTemperature

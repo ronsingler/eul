@@ -627,6 +627,12 @@ public extension SMCKit {
         .map { TemperatureSensor(name: "Unknown", code: $0.code) }
     }
 
+    /// Get a power reading in watts, such as PSTR (whole system) on Apple silicon
+    static func power(_ code: FourCharCode) throws -> Double {
+        let data = try readData(SMCKey(code: code, info: DataTypes.FLT))
+        return Double(fromFLT: (data.0, data.1, data.2, data.3))
+    }
+
     /// Get current temperature of a sensor
     static func temperature(_ sensorCode: FourCharCode,
                             info: DataType = DataTypes.SP78,
