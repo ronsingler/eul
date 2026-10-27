@@ -6,51 +6,47 @@
 
 ![Preview](https://user-images.githubusercontent.com/14722250/105626766-f718ab00-5e6c-11eb-9761-661ff85c8faf.jpg)
 
+This is an updated fork of [gao-sun/eul](https://github.com/gao-sun/eul) by Gao Sun (MIT license), a macOS menu bar app that shows CPU, GPU, memory, network, disk, battery and fan stats. The original hasn't changed since early 2022 and doesn't read sensors correctly on Apple silicon. This fork fixes that.
+
 ## Highlights
 
+- Works on Apple silicon (M series) and Intel Macs
 - Dark Mode compatible
-- Big Sur widgets out of the box
+- Widgets out of the box
 - Bluetooth battery level
 - Written in SwiftUI (as much as possible)
 
+## What's new in 1.7.0
+
+- **Temperatures on Apple silicon**: CPU, GPU and memory temperatures now read correctly on M series chips.
+- **GPU**: the built-in Apple GPU now shows up.
+- **CPU**: usage split by performance (P) and efficiency (E) cores, plus total system power in watts.
+- **Memory**: memory pressure, with Normal, Warning or Critical.
+- **Battery**: capacity in mAh is correct again, and new battery temperature and charge rate (watts in or out). "Time to empty" no longer shows "0 min" while plugged in.
+- Translations for all the new labels.
+- Signed and notarized, so macOS opens it without a warning. Updates come from this fork.
+
 ## OS Requirement
 
-macOS 12 or later. Current Xcode cannot build for older versions.
-
-## Building on Apple silicon
-
-This fork updates eul for M series Macs. To build it yourself:
-
-1. Open `eul.xcodeproj` in Xcode.
-2. For each target (eul, SelfUpdate, SharedLibrary and the four widgets), open **Signing & Capabilities** and pick your own team.
-3. Pick the `eul` scheme and press Run.
-
-Update checks point at this fork (`ronsingler/eul`), so the app won't pull builds from the original project.
+macOS 12 or later. Tested on a MacBook Air with M2. Sensor names differ between chips, so if a reading is missing on your Mac, please open an issue with your Mac model and chip.
 
 ## Installation
 
-### Download
+Download the [latest release](https://github.com/ronsingler/eul/releases/latest/download/eul.app.zip), unzip it, and drag `eul.app` into your `Applications` folder. If you have the original eul installed, quit it first and replace it. Your settings carry over.
 
-Download the [latest release](https://github.com/ronsingler/eul/releases/latest/download/eul.app.zip) directly and drag `.app` file into your `Application` folder.
+The app checks this fork for updates. Release notes are on the [releases page](https://github.com/ronsingler/eul/releases).
 
-### Homebrew Cask
+The Homebrew cask (`brew install --cask eul`) and the App Store version both install the original eul, which doesn't have these fixes.
 
-```bash
-brew install --cask eul
-```
+## Building it yourself
 
-### App Store
+1. Open `eul.xcodeproj` in Xcode (current Xcode needs macOS 12 as the lowest target).
+2. For each target (eul, SelfUpdate, SharedLibrary and the four widgets), open **Signing & Capabilities** and pick your own team.
+3. Pick the `eul` scheme and press Run.
 
-Search `eul` or [click here](https://apps.apple.com/us/app/eul/id1537133867) to view in App Store.
+## Publishing a release
 
-Note:
-
-1. Some features are disabled due to the removal of all SMC calls.
-2. The version is out-dated.
-
-### Release Notes
-
-[Click here](https://github.com/ronsingler/eul/releases/latest) to browse our latest release notes.
+Bump `MARKETING_VERSION` in the project to the new version, merge to `master`, then on GitHub go to **Releases > Draft a new release**, create a tag like `v1.7.1` on `master`, and publish. The Release workflow builds a universal app, signs and notarizes it, and adds `eul.app.zip` to the release. The secrets it needs are listed at the top of `.github/workflows/release.yml`.
 
 ## Contributors
 
@@ -120,6 +116,7 @@ let languages = [
   "日本語", "Français", "Українська",
   "Svenska", "Čeština", "Italiano",
   "繁體中文", "မြန်မာဘာသာ", "Magyar",
-  "ไทย", "Türkçe"
+  "ไทย", "Türkçe", "Dansk",
+  "Polski"
 ];
 ```
