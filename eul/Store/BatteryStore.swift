@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IOKit
 import SharedLibrary
 import SystemKit
 import WidgetKit
@@ -51,10 +52,29 @@ class BatteryStore: ObservableObject, Refreshable {
         capacity = battery.currentCapacity()
         maxCapacity = battery.maxCapactiy()
         designCapacity = battery.designCapacity()
+        // Newer macOS on Apple silicon reports percentages at the top level and
+        // keeps the mAh values only inside "BatteryData"
+        if let batteryData = Self.getBatteryData() {
+            capacity = batteryData["AppleRawCurrentCapacity"] as? Int ?? capacity
+            maxCapacity = batteryData["AppleRawMaxCapacity"] as? Int ?? maxCapacity
+            designCapacity = batteryData["DesignCapacity"] as? Int ?? designCapacity
+        }
         cycleCount = battery.cycleCount()
         timeRemaining = io.powerSource == .battery ? battery.timeRemainingFormatted() : "∞"
         _ = battery.close()
         writeToContainer()
+    }
+
+    private static func getBatteryData() -> [String: Any]? {
+        let service = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleSmartBattery"))
+        guard service != 0 else {
+            return nil
+        }
+        defer {
+            IOObjectRelease(service)
+        }
+        return IORegistryEntryCreateCFProperty(service, "BatteryData" as CFString, kCFAllocatorDefault, 0)?
+            .takeRetainedValue() as? [String: Any]
     }
 
     func writeToContainer() {
