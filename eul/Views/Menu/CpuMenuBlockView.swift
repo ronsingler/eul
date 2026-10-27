@@ -51,6 +51,20 @@ struct CpuMenuBlockView: View {
                             }
                         }
                     }
+                    if let performanceUsage = cpuStore.performanceUsage, let efficiencyUsage = cpuStore.efficiencyUsage {
+                        HStack {
+                            MiniSectionView(
+                                title: "\("cpu.performance_cores".localized()) (\(cpuStore.performanceCores))",
+                                value: String(format: "%.1f%%", performanceUsage)
+                            )
+                            Spacer()
+                            MiniSectionView(
+                                title: "\("cpu.efficiency_cores".localized()) (\(cpuStore.efficiencyCores))",
+                                value: String(format: "%.1f%%", efficiencyUsage)
+                            )
+                            Spacer()
+                        }
+                    }
                 }
             }
             if preferenceStore.showCPUTopActivities {

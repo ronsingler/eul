@@ -42,6 +42,8 @@
 "cpu.system" = "Sistema";
 "cpu.user" = "Utente";
 "cpu.nice" = "Nice";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "In attesa...";
 
 // MARK: Fan

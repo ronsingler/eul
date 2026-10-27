@@ -41,6 +41,8 @@
 "cpu.system" = "Sistema";
 "cpu.user" = "Utilizador";
 "cpu.nice" = "Nice";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "À espera do primeiro relatório";
 
 // MARK: Fan

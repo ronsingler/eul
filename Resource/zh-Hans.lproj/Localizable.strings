@@ -41,6 +41,8 @@
 "cpu.system" = "系统";
 "cpu.user" = "用户";
 "cpu.nice" = "Nice";
+"cpu.performance_cores" = "P cores";
+"cpu.efficiency_cores" = "E cores";
 "cpu.waiting_status_report" = "正在等待状态更新";
 
 // MARK: Fan
