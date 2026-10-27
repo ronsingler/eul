@@ -82,6 +82,22 @@ struct BatteryMenuBlockView: View {
                     MiniSectionView(title: "battery.time_remaining".localized(), value: batteryStore.timeRemaining)
                 }
             }
+            if batteryStore.temperature != nil || batteryStore.power != nil {
+                HStack {
+                    batteryStore.temperature.map { temperature in
+                        Group {
+                            MiniSectionView(title: "battery.temperature", value: SmcControl.shared.formatTemp(temperature))
+                            Spacer()
+                        }
+                    }
+                    batteryStore.power.map { power in
+                        Group {
+                            MiniSectionView(title: "battery.power", value: String(format: "%+.1f W", power))
+                            Spacer()
+                        }
+                    }
+                }
+            }
         }
         .menuBlock()
     }

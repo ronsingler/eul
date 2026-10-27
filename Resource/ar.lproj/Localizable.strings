@@ -27,6 +27,8 @@
 "battery.condition.good" = "جيدة";
 "battery.condition.fair" = "وسط";
 "battery.condition.poor" = "رديئة";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "إستعمال";

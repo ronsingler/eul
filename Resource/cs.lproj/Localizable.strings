@@ -27,6 +27,8 @@
 "battery.condition.good" = "Dobrá";
 "battery.condition.fair" = "Dostatečná";
 "battery.condition.poor" = "Špatná";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "Využití";

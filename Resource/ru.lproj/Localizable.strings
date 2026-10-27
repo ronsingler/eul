@@ -27,6 +27,8 @@
 "battery.condition.good" = "Хорошо";
 "battery.condition.fair" = "Нормально";
 "battery.condition.poor" = "Плохо";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "Нагрузка";

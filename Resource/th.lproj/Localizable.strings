@@ -27,6 +27,8 @@
 "battery.condition.good" = "ปกติ";
 "battery.condition.fair" = "ปานกลาง";
 "battery.condition.poor" = "แย่";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "ใช้ไป";

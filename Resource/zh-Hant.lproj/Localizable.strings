@@ -27,6 +27,8 @@
 "battery.condition.good" = "好";
 "battery.condition.fair" = "尚可";
 "battery.condition.poor" = "差";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "用量";

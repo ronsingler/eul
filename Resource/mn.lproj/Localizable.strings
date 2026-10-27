@@ -27,6 +27,8 @@
 "battery.condition.good" = "Сайн";
 "battery.condition.fair" = "Дунд";
 "battery.condition.poor" = "Муу";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "Хэрэглээ";
