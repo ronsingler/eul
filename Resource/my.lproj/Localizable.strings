@@ -43,6 +43,7 @@
 "cpu.nice" = "ကောင်း";
 "cpu.performance_cores" = "P cores";
 "cpu.efficiency_cores" = "E cores";
+"cpu.system_power" = "Power";
 "cpu.waiting_status_report" = "ပထမဆုံးအကြိမ်အချက်အလက်ရယူနေသည်";
 
 // MARK: Fan

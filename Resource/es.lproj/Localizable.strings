@@ -43,6 +43,7 @@
 "cpu.nice" = "Bueno";
 "cpu.performance_cores" = "P cores";
 "cpu.efficiency_cores" = "E cores";
+"cpu.system_power" = "Power";
 "cpu.waiting_status_report" = "Esperando al primer reporte de estado";
 
 // MARK: Fan

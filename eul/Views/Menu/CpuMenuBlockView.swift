@@ -51,18 +51,23 @@ struct CpuMenuBlockView: View {
                             }
                         }
                     }
-                    if let performanceUsage = cpuStore.performanceUsage, let efficiencyUsage = cpuStore.efficiencyUsage {
+                    if cpuStore.performanceUsage != nil || cpuStore.systemPower != nil {
                         HStack {
-                            MiniSectionView(
-                                title: "\("cpu.performance_cores".localized()) (\(cpuStore.performanceCores))",
-                                value: String(format: "%.1f%%", performanceUsage)
-                            )
-                            Spacer()
-                            MiniSectionView(
-                                title: "\("cpu.efficiency_cores".localized()) (\(cpuStore.efficiencyCores))",
-                                value: String(format: "%.1f%%", efficiencyUsage)
-                            )
-                            Spacer()
+                            if let performanceUsage = cpuStore.performanceUsage, let efficiencyUsage = cpuStore.efficiencyUsage {
+                                MiniSectionView(
+                                    title: "\("cpu.performance_cores".localized()) (\(cpuStore.performanceCores))",
+                                    value: String(format: "%.1f%%", performanceUsage)
+                                )
+                                Spacer()
+                                MiniSectionView(
+                                    title: "\("cpu.efficiency_cores".localized()) (\(cpuStore.efficiencyCores))",
+                                    value: String(format: "%.1f%%", efficiencyUsage)
+                                )
+                                Spacer()
+                            }
+                            if let systemPower = cpuStore.systemPower {
+                                MiniSectionView(title: "cpu.system_power", value: String(format: "%.1f W", systemPower))
+                            }
                         }
                     }
                 }
