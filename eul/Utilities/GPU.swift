@@ -12,6 +12,8 @@ struct GPU: Identifiable {
     var deviceId: String
     var model: String?
     var vendor: String?
+    // Apple silicon GPUs are built into the chip and have no PCI device id
+    var isBuiltIn = false
 
     var id: String {
         deviceId
@@ -20,7 +22,7 @@ struct GPU: Identifiable {
 
 extension GPU {
     struct Statistic {
-        var pciMatch: String
+        var pciMatch: String?
         var usagePercentage: Int
         var temperature: Double?
         var coreClock: Int?
@@ -40,10 +42,16 @@ extension GPU {
         }
 
         return plistArray.first?.items.compactMap {
-            guard $0.isGPU, let deviceId = $0.deviceId else {
+            guard $0.isGPU else {
                 return nil
             }
-            return GPU(deviceId: deviceId, model: $0.model, vendor: $0.vendor)
+            if let deviceId = $0.deviceId {
+                return GPU(deviceId: deviceId, model: $0.model, vendor: $0.vendor)
+            }
+            guard let model = $0.model else {
+                return nil
+            }
+            return GPU(deviceId: model, model: model, vendor: $0.vendor, isBuiltIn: true)
         }
     }
 
@@ -55,8 +63,9 @@ extension GPU {
         }
 
         return propertyList.compactMap {
+            let pciMatch = $0["IOPCIMatch"] as? String ?? $0["IOPCIPrimaryMatch"] as? String
+
             guard
-                let pciMatch = $0["IOPCIMatch"] as? String ?? $0["IOPCIPrimaryMatch"] as? String,
                 let statistics = $0["PerformanceStatistics"] as? [String: Any],
                 let usagePercentage = statistics["Device Utilization %"] as? Int ?? statistics["GPU Activity(%)"] as? Int
             else {
