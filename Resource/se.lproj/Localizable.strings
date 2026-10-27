@@ -28,6 +28,8 @@ Copyright © 2020 Gao Sun. All rights reserved.
 "battery.condition.good" = "Bra";
 "battery.condition.fair" = "Ok";
 "battery.condition.poor" = "Dåligt";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "Användning";

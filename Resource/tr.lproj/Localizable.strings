@@ -27,6 +27,8 @@
 "battery.condition.good" = "İyi";
 "battery.condition.fair" = "Orta";
 "battery.condition.poor" = "Zayıf";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "Kullanım";

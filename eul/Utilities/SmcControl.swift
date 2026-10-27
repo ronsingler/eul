@@ -39,6 +39,17 @@ class SmcControl: Refreshable {
             ?? averageTemperature(prefixes: ["Tm"])
     }
 
+    /// Average of the battery sensors (TB0T, TB1T...)
+    var batteryTemperature: Double? {
+        let temps = sensors
+            .filter { $0.sensor.code.toString().hasPrefix("TB") }
+            .compactMap { $0.temp }
+        guard temps.count > 0 else {
+            return nil
+        }
+        return temps.reduce(0, +) / Double(temps.count)
+    }
+
     /// Average of the Apple silicon sensors whose names start with one of the prefixes
     private func averageTemperature(prefixes: [String]) -> Double? {
         let temps = sensors

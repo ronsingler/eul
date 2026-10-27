@@ -30,6 +30,8 @@ battery.timeRemaining = "Time Rem.";
 "battery.condition.good" = "좋음";
 "battery.condition.fair" = "보통";
 "battery.condition.poor" = "나쁨";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "사용량";

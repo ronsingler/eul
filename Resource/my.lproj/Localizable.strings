@@ -27,6 +27,8 @@
 "battery.condition.good" = "ကောင်း";
 "battery.condition.fair" = "အသင့်အတင့်";
 "battery.condition.poor" = "ဆိုး";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "အသုံးပြုမှု";

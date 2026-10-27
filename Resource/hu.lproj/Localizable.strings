@@ -27,6 +27,8 @@
 "battery.condition.good" = "Jó";
 "battery.condition.fair" = "Közepes";
 "battery.condition.poor" = "Rossz";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "Használat";

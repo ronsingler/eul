@@ -27,6 +27,9 @@ class BatteryStore: ObservableObject, Refreshable {
     @Published var designCapacity = 0
     @Published var cycleCount = 0
     @Published var timeRemaining = "∞"
+    @Published var temperature: Double?
+    /// Watts going into the battery, negative while it discharges
+    @Published var power: Double?
 
     var charge: Double {
         io.currentCharge
@@ -54,18 +57,28 @@ class BatteryStore: ObservableObject, Refreshable {
         designCapacity = battery.designCapacity()
         // Newer macOS on Apple silicon reports percentages at the top level and
         // keeps the mAh values only inside "BatteryData"
-        if let batteryData = Self.getBatteryData() {
+        if let batteryData = Self.getBatteryProperty("BatteryData") as? [String: Any] {
             capacity = batteryData["AppleRawCurrentCapacity"] as? Int ?? capacity
             maxCapacity = batteryData["AppleRawMaxCapacity"] as? Int ?? maxCapacity
             designCapacity = batteryData["DesignCapacity"] as? Int ?? designCapacity
         }
         cycleCount = battery.cycleCount()
+        temperature = SmcControl.shared.batteryTemperature
+        // Amperage is signed but can arrive as a huge unsigned number, so read its bits
+        if
+            let millivolts = (Self.getBatteryProperty("Voltage") as? NSNumber)?.int64Value,
+            let milliamps = (Self.getBatteryProperty("Amperage") as? NSNumber)?.int64Value
+        {
+            power = Double(millivolts) * Double(milliamps) / 1_000_000
+        } else {
+            power = nil
+        }
         timeRemaining = io.powerSource == .battery ? battery.timeRemainingFormatted() : "∞"
         _ = battery.close()
         writeToContainer()
     }
 
-    private static func getBatteryData() -> [String: Any]? {
+    private static func getBatteryProperty(_ key: String) -> Any? {
         let service = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleSmartBattery"))
         guard service != 0 else {
             return nil
@@ -73,8 +86,8 @@ class BatteryStore: ObservableObject, Refreshable {
         defer {
             IOObjectRelease(service)
         }
-        return IORegistryEntryCreateCFProperty(service, "BatteryData" as CFString, kCFAllocatorDefault, 0)?
-            .takeRetainedValue() as? [String: Any]
+        return IORegistryEntryCreateCFProperty(service, key as CFString, kCFAllocatorDefault, 0)?
+            .takeRetainedValue()
     }
 
     func writeToContainer() {

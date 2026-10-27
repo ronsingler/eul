@@ -28,6 +28,8 @@
 "battery.condition.good" = "Buone";
 "battery.condition.fair" = "Medie";
 "battery.condition.poor" = "Basse";
+"battery.temperature" = "Temp";
+"battery.power" = "Power";
 
 // MARK: CPU / Info
 "cpu.usage" = "Utilizzo";
