@@ -27,8 +27,8 @@
 "battery.condition.good" = "好";
 "battery.condition.fair" = "尚可";
 "battery.condition.poor" = "差";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "温度";
+"battery.power" = "功率";
 
 // MARK: CPU / Info
 "cpu.usage" = "用量";
@@ -43,9 +43,9 @@
 "cpu.system" = "系统";
 "cpu.user" = "用户";
 "cpu.nice" = "Nice";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "性能核心";
+"cpu.efficiency_cores" = "能效核心";
+"cpu.system_power" = "功率";
 "cpu.waiting_status_report" = "正在等待状态更新";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "App";
 "memory.wired" = "联动";
 "memory.compressed" = "被压缩";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "压力";
+"memory.pressure.normal" = "正常";
+"memory.pressure.warning" = "警告";
+"memory.pressure.critical" = "严重";
 
 // MARK: Network
 "network" = "网络";

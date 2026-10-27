@@ -27,8 +27,8 @@
 "battery.condition.good" = "Dobrá";
 "battery.condition.fair" = "Dostatečná";
 "battery.condition.poor" = "Špatná";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "Teplota";
+"battery.power" = "Příkon";
 
 // MARK: CPU / Info
 "cpu.usage" = "Využití";
@@ -43,9 +43,9 @@
 "cpu.system" = "Systém";
 "cpu.user" = "Uživatel";
 "cpu.nice" = "Prioritní";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P jádra";
+"cpu.efficiency_cores" = "E jádra";
+"cpu.system_power" = "Příkon";
 "cpu.waiting_status_report" = "Čekání na první hlášení o stavu";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "Aplikace";
 "memory.wired" = "Nepřesunutelná";
 "memory.compressed" = "Komprimovaná";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "Tlak";
+"memory.pressure.normal" = "Normální";
+"memory.pressure.warning" = "Varování";
+"memory.pressure.critical" = "Kritický";
 
 // MARK: Network
 "network" = "Síť";

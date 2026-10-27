@@ -27,8 +27,8 @@
 "battery.condition.good" = "Jó";
 "battery.condition.fair" = "Közepes";
 "battery.condition.poor" = "Rossz";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "Hőm.";
+"battery.power" = "Teljesítmény";
 
 // MARK: CPU / Info
 "cpu.usage" = "Használat";
@@ -43,9 +43,9 @@
 "cpu.system" = "Rendszer";
 "cpu.user" = "Felhaszn.";
 "cpu.nice" = "Nice";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P magok";
+"cpu.efficiency_cores" = "E magok";
+"cpu.system_power" = "Teljesítmény";
 "cpu.waiting_status_report" = "Várakozás az első jelentésre";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "App";
 "memory.wired" = "Vezetékes";
 "memory.compressed" = "Tömörített";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "Terhelés";
+"memory.pressure.normal" = "Normál";
+"memory.pressure.warning" = "Figyelmeztetés";
+"memory.pressure.critical" = "Kritikus";
 
 // MARK: Network
 "network" = "Hálózat";

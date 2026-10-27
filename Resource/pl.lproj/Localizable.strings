@@ -28,7 +28,7 @@
 "battery.condition.fair" = "W normie";
 "battery.condition.poor" = "Słaba";
 "battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.power" = "Moc";
 
 // MARK: CPU / Info
 "cpu.usage" = "Zużycie";
@@ -43,9 +43,9 @@
 "cpu.system" = "System";
 "cpu.user" = "Użytkownik";
 "cpu.nice" = "Nice";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "Rdzenie P";
+"cpu.efficiency_cores" = "Rdzenie E";
+"cpu.system_power" = "Moc";
 "cpu.waiting_status_report" = "Czekam na pierwszy raport o stanie";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "Aplikacja";
 "memory.wired" = "Wired";
 "memory.compressed" = "Skompresowana";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "Obciążenie";
+"memory.pressure.normal" = "Normalne";
+"memory.pressure.warning" = "Ostrzeżenie";
+"memory.pressure.critical" = "Krytyczne";
 
 // MARK: Network
 "network" = "Sieć";

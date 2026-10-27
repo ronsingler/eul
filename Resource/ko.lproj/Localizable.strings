@@ -30,8 +30,8 @@ battery.timeRemaining = "Time Rem.";
 "battery.condition.good" = "좋음";
 "battery.condition.fair" = "보통";
 "battery.condition.poor" = "나쁨";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "온도";
+"battery.power" = "전력";
 
 // MARK: CPU / Info
 "cpu.usage" = "사용량";
@@ -46,9 +46,9 @@ battery.timeRemaining = "Time Rem.";
 "cpu.system" = "시스템";
 "cpu.user" = "사용자";
 "cpu.nice" = "낮은 우선순위 사용자";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P 코어";
+"cpu.efficiency_cores" = "E 코어";
+"cpu.system_power" = "전력";
 "cpu.waiting_status_report" = "첫 보고 대기중";
 
 // MARK: Fan
@@ -67,10 +67,10 @@ battery.timeRemaining = "Time Rem.";
 "memory.app" = "앱 메모리";
 "memory.wired" = "와이어드 메모리";
 "memory.compressed" = "압축됨";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "압력";
+"memory.pressure.normal" = "정상";
+"memory.pressure.warning" = "경고";
+"memory.pressure.critical" = "위험";
 
 // MARK: Network
 "network" = "네트워크";

@@ -29,7 +29,7 @@ Copyright © 2020 Gao Sun. All rights reserved.
 "battery.condition.fair" = "Ok";
 "battery.condition.poor" = "Dåligt";
 "battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.power" = "Effekt";
 
 // MARK: CPU / Info
 "cpu.usage" = "Användning";
@@ -44,9 +44,9 @@ Copyright © 2020 Gao Sun. All rights reserved.
 "cpu.system" = "System";
 "cpu.user" = "Användare";
 "cpu.nice" = "Nice";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P-kärnor";
+"cpu.efficiency_cores" = "E-kärnor";
+"cpu.system_power" = "Effekt";
 "cpu.waiting_status_report" = "Väntar på statusrapport";
 
 // MARK: Fan
@@ -65,10 +65,10 @@ Copyright © 2020 Gao Sun. All rights reserved.
 "memory.app" = "App";
 "memory.wired" = "Kärna";
 "memory.compressed" = "Komprimerat";
-"memory.pressure" = "Pressure";
+"memory.pressure" = "Tryck";
 "memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure.warning" = "Varning";
+"memory.pressure.critical" = "Kritisk";
 
 // MARK: Network
 "network" = "Nätverk";

@@ -27,8 +27,8 @@
 "battery.condition.good" = "Сайн";
 "battery.condition.fair" = "Дунд";
 "battery.condition.poor" = "Муу";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "Хэм";
+"battery.power" = "Чадал";
 
 // MARK: CPU / Info
 "cpu.usage" = "Хэрэглээ";
@@ -43,9 +43,9 @@
 "cpu.system" = "Систем";
 "cpu.user" = "Хэрэглэгч";
 "cpu.nice" = "Nice";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P цөм";
+"cpu.efficiency_cores" = "E цөм";
+"cpu.system_power" = "Чадал";
 "cpu.waiting_status_report" = "Эхний мэдэгдлийг хүлээж байна";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "Апп";
 "memory.wired" = "ҮС-ийн";
 "memory.compressed" = "Шахагдсан";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "Ачаалал";
+"memory.pressure.normal" = "Хэвийн";
+"memory.pressure.warning" = "Анхааруулга";
+"memory.pressure.critical" = "Ноцтой";
 
 // MARK: Network
 "network" = "Сүлжээ";

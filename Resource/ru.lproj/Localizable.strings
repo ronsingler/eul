@@ -27,8 +27,8 @@
 "battery.condition.good" = "Хорошо";
 "battery.condition.fair" = "Нормально";
 "battery.condition.poor" = "Плохо";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "Температура";
+"battery.power" = "Мощность";
 
 // MARK: CPU / Info
 "cpu.usage" = "Нагрузка";
@@ -43,9 +43,9 @@
 "cpu.system" = "Система";
 "cpu.user" = "Пользователь";
 "cpu.nice" = "Приоритет";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P-ядра";
+"cpu.efficiency_cores" = "E-ядра";
+"cpu.system_power" = "Мощность";
 "cpu.waiting_status_report" = "Ожидание первого статус репорта";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "Приложение";
 "memory.wired" = "Зарезервировано";
 "memory.compressed" = "Сжато";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "Нагрузка";
+"memory.pressure.normal" = "Норма";
+"memory.pressure.warning" = "Внимание";
+"memory.pressure.critical" = "Критично";
 
 // MARK: Network
 "network" = "Сеть";
