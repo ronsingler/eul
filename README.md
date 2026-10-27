@@ -6,7 +6,7 @@
 
 ![Preview](https://user-images.githubusercontent.com/14722250/105626766-f718ab00-5e6c-11eb-9761-661ff85c8faf.jpg)
 
-This is an updated fork of [gao-sun/eul](https://github.com/gao-sun/eul), a macOS menu bar app that shows CPU, GPU, memory, network, disk, battery and fan stats. The original hasn't changed since early 2022 and doesn't read sensors correctly on Apple silicon. This fork fixes that.
+This is an updated fork of [gao-sun/eul](https://github.com/gao-sun/eul) by Gao Sun (MIT license), a macOS menu bar app that shows CPU, GPU, memory, network, disk, battery and fan stats. The original hasn't changed since early 2022 and doesn't read sensors correctly on Apple silicon. This fork fixes that.
 
 ## Highlights
 
@@ -28,11 +28,11 @@ This is an updated fork of [gao-sun/eul](https://github.com/gao-sun/eul), a macO
 
 ## OS Requirement
 
-macOS 12 or later.
+macOS 12 or later. Tested on a MacBook Air with M2. Sensor names differ between chips, so if a reading is missing on your Mac, please open an issue with your Mac model and chip.
 
 ## Installation
 
-Download the [latest release](https://github.com/ronsingler/eul/releases/latest/download/eul.app.zip), unzip it, and drag `eul.app` into your `Applications` folder. If you have the original eul installed, quit it first and replace it.
+Download the [latest release](https://github.com/ronsingler/eul/releases/latest/download/eul.app.zip), unzip it, and drag `eul.app` into your `Applications` folder. If you have the original eul installed, quit it first and replace it. Your settings carry over.
 
 The app checks this fork for updates. Release notes are on the [releases page](https://github.com/ronsingler/eul/releases).
 
