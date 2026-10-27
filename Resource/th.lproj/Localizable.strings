@@ -62,6 +62,10 @@
 "memory.app" = "แอพ";
 "memory.wired" = "OS ใช้";
 "memory.compressed" = "บีบอัด";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "เครือข่าย";

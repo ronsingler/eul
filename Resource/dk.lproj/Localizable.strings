@@ -63,6 +63,10 @@
 "memory.app" = "app";
 "memory.wired" = "kernel";
 "memory.compressed" = "komprimeret";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "netværk";

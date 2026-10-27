@@ -65,6 +65,10 @@ battery.timeRemaining = "Time Rem.";
 "memory.app" = "앱 메모리";
 "memory.wired" = "와이어드 메모리";
 "memory.compressed" = "압축됨";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "네트워크";

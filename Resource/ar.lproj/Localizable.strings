@@ -62,6 +62,10 @@
 "memory.app" = "تطبيق";
 "memory.wired" = "سلكي";
 "memory.compressed" = "مضغوط";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "شبكة الاتصال";

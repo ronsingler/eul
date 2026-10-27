@@ -62,6 +62,10 @@
 "memory.app" = "Пам'ять програм";
 "memory.wired" = "Постійна";
 "memory.compressed" = "Стистена";
+"memory.pressure" = "Pressure";
+"memory.pressure.normal" = "Normal";
+"memory.pressure.warning" = "Warning";
+"memory.pressure.critical" = "Critical";
 
 // MARK: Network
 "network" = "Мережа";
