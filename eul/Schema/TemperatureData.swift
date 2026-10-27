@@ -11,10 +11,12 @@ import SharedLibrary
 
 class TemperatureData {
     let sensor: TemperatureSensor
-    var temp: Double
+    let info: DataType
+    var temp: Double?
 
-    init(sensor: TemperatureSensor, temp: Double = 0) {
+    init(sensor: TemperatureSensor, info: DataType = DataTypes.SP78, temp: Double? = nil) {
         self.sensor = sensor
+        self.info = info
         self.temp = temp
     }
 }
