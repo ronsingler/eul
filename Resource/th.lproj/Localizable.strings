@@ -27,8 +27,8 @@
 "battery.condition.good" = "ปกติ";
 "battery.condition.fair" = "ปานกลาง";
 "battery.condition.poor" = "แย่";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "อุณหภูมิ";
+"battery.power" = "พลังงาน";
 
 // MARK: CPU / Info
 "cpu.usage" = "ใช้ไป";
@@ -43,9 +43,9 @@
 "cpu.system" = "ระบบ";
 "cpu.user" = "ผู้ใช้";
 "cpu.nice" = "Nice";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "คอร์ P";
+"cpu.efficiency_cores" = "คอร์ E";
+"cpu.system_power" = "พลังงาน";
 "cpu.waiting_status_report" = "กำลังรอที่จะรายงานครั้งแรก";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "แอพ";
 "memory.wired" = "OS ใช้";
 "memory.compressed" = "บีบอัด";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "แรงกดดัน";
+"memory.pressure.normal" = "ปกติ";
+"memory.pressure.warning" = "คำเตือน";
+"memory.pressure.critical" = "วิกฤต";
 
 // MARK: Network
 "network" = "เครือข่าย";

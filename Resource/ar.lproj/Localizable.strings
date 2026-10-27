@@ -27,8 +27,8 @@
 "battery.condition.good" = "جيدة";
 "battery.condition.fair" = "وسط";
 "battery.condition.poor" = "رديئة";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "درجة الحرارة";
+"battery.power" = "الطاقة";
 
 // MARK: CPU / Info
 "cpu.usage" = "إستعمال";
@@ -43,9 +43,9 @@
 "cpu.system" = "النظام";
 "cpu.user" = "المستعمل";
 "cpu.nice" = "لطيف";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "أنوية P";
+"cpu.efficiency_cores" = "أنوية E";
+"cpu.system_power" = "الطاقة";
 "cpu.waiting_status_report" = "في انتظار تقرير الحالة الأول";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "تطبيق";
 "memory.wired" = "سلكي";
 "memory.compressed" = "مضغوط";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "الضغط";
+"memory.pressure.normal" = "عادي";
+"memory.pressure.warning" = "تحذير";
+"memory.pressure.critical" = "حرج";
 
 // MARK: Network
 "network" = "شبكة الاتصال";

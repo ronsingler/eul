@@ -28,8 +28,8 @@
 "battery.condition.good" = "godt";
 "battery.condition.fair" = "okay";
 "battery.condition.poor" = "dårlig";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "temp.";
+"battery.power" = "effekt";
 
 // MARK: CPU / Info
 "cpu.usage" = "brug";
@@ -44,9 +44,9 @@
 "cpu.system" = "system";
 "cpu.user" = "bruger";
 "cpu.nice" = "pæn";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P-kerner";
+"cpu.efficiency_cores" = "E-kerner";
+"cpu.system_power" = "effekt";
 "cpu.waiting_status_report" = "venter på statusrapport";
 
 // MARK: Fan
@@ -65,10 +65,10 @@
 "memory.app" = "app";
 "memory.wired" = "kernel";
 "memory.compressed" = "komprimeret";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "pres";
+"memory.pressure.normal" = "normalt";
+"memory.pressure.warning" = "advarsel";
+"memory.pressure.critical" = "kritisk";
 
 // MARK: Network
 "network" = "netværk";

@@ -27,8 +27,8 @@
 "battery.condition.good" = "良い";
 "battery.condition.fair" = "普通";
 "battery.condition.poor" = "悪い";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "温度";
+"battery.power" = "電力";
 
 // MARK: CPU / Info
 "cpu.usage" = "使用率";
@@ -43,9 +43,9 @@
 "cpu.system" = "システム";
 "cpu.user" = "ユーザー";
 "cpu.nice" = "Nice";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "Pコア";
+"cpu.efficiency_cores" = "Eコア";
+"cpu.system_power" = "電力";
 "cpu.waiting_status_report" = "ステータスの更新を待っています";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "App メモリ";
 "memory.wired" = "確保されているメモリ";
 "memory.compressed" = "圧縮";
-"memory.pressure" = "Pressure";
-"memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure" = "プレッシャー";
+"memory.pressure.normal" = "正常";
+"memory.pressure.warning" = "警告";
+"memory.pressure.critical" = "危険";
 
 // MARK: Network
 "network" = "ネットワーク";

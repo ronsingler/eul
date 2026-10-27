@@ -27,8 +27,8 @@
 "battery.condition.good" = "İyi";
 "battery.condition.fair" = "Orta";
 "battery.condition.poor" = "Zayıf";
-"battery.temperature" = "Temp";
-"battery.power" = "Power";
+"battery.temperature" = "Sıcaklık";
+"battery.power" = "Güç";
 
 // MARK: CPU / Info
 "cpu.usage" = "Kullanım";
@@ -43,9 +43,9 @@
 "cpu.system" = "Sistem";
 "cpu.user" = "Kullanıcı";
 "cpu.nice" = "Öncelik";
-"cpu.performance_cores" = "P cores";
-"cpu.efficiency_cores" = "E cores";
-"cpu.system_power" = "Power";
+"cpu.performance_cores" = "P çekirdek";
+"cpu.efficiency_cores" = "E çekirdek";
+"cpu.system_power" = "Güç";
 "cpu.waiting_status_report" = "İlk durum raporu bekleniyor";
 
 // MARK: Fan
@@ -64,10 +64,10 @@
 "memory.app" = "Uygulama";
 "memory.wired" = "Bağlı";
 "memory.compressed" = "Sıkıştırılmış";
-"memory.pressure" = "Pressure";
+"memory.pressure" = "Baskı";
 "memory.pressure.normal" = "Normal";
-"memory.pressure.warning" = "Warning";
-"memory.pressure.critical" = "Critical";
+"memory.pressure.warning" = "Uyarı";
+"memory.pressure.critical" = "Kritik";
 
 // MARK: Network
 "network" = "Ağ";
